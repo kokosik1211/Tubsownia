@@ -164,7 +164,7 @@
 
   <div id="stream" class="stream">
     <h2>Aktualny stream Tubsona</h2>
-    <iframe src="https://player.twitch.tv/?channel=Tubson_&parent=gitownia.netlify.app" allowfullscreen></iframe>
+    <div id="streamContent"></div>
   </div>
 
   <h2 style="text-align: center; margin-top: 40px;">Ostatnie filmy Tubsona</h2>
@@ -204,6 +204,35 @@
       const random = Math.floor(Math.random() * quotes.length);
       document.getElementById("random-quote").textContent = quotes[random];
     }
+
+    const clientId = 'your-twitch-client-id'; // Zarejestruj aplikację w Twitch Developer Console
+    const accessToken = 'your-twitch-access-token'; // Uzyskaj token dostępu
+
+    async function checkStreamStatus() {
+      const url = `https://api.twitch.tv/helix/streams?user_login=Tubson_`;
+      const response = await fetch(url, {
+        headers: {
+          'Client-ID': clientId,
+          'Authorization': `Bearer ${accessToken}`,
+        }
+      });
+
+      const data = await response.json();
+      const streamContent = document.getElementById('streamContent');
+      
+      if (data.data.length > 0) {
+        // Streamer jest online, wyświetlamy iframe
+        streamContent.innerHTML = `<iframe src="https://player.twitch.tv/?channel=Tubson_&parent=gitownia.netlify.app" allowfullscreen></iframe>`;
+      } else {
+        // Streamer jest offline, wyświetlamy komunikat
+        streamContent.innerHTML = `
+          <p>Tubson śpi. Spróbuj ponownie później!</p>
+        `;
+      }
+    }
+
+    // Sprawdzamy status streama, gdy strona się załaduje
+    checkStreamStatus();
 
     const API_KEY = 'AIzaSyDwoqfuwuGHzUKxJw6V5-OLNqB9N2JpfMY';
     const tubsonChannelId = 'UCKhro5ru4pP_XzJl9xG3AFw';
