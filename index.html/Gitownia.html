@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GITOWNIA - Oficjalna Strona</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1f1f2e;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #3c1c68;
+      color: #adff2f;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      cursor: pointer;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+    .social-container {
+      text-align: right;
+    }
+    .social-label {
+      font-size: 14px;
+      color: #adff2f;
+      margin-bottom: 5px;
+    }
+    .social-icons a {
+      margin-left: 10px;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      color: #adff2f;
+    }
+    nav {
+      text-align: center;
+      margin: 20px 0;
+    }
+    nav button {
+      background-color: #5d28a1;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      margin: 0 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    nav button:hover {
+      background-color: #adff2f;
+      color: black;
+    }
+    .container {
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .video-card, .shot-card {
+      width: 320px;
+      margin: 10px;
+      background-color: #2a2a3d;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(173, 255, 47, 0.3);
+      text-align: center;
+      padding: 10px;
+    }
+    iframe {
+      width: 100%;
+      height: 180px;
+      border-radius: 10px;
+    }
+    .text-section {
+      max-width: 800px;
+      margin: auto;
+      background: #2a2a3d;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(173, 255, 47, 0.3);
+      text-align: center;
+    }
+    .stream {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .stream iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      border-radius: 10px;
+    }
+    .shot-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .shot-card a {
+      color: #adff2f;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    #generate-quote-button {
+      background-color: #5d28a1;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+    #generate-quote-button:hover {
+      background-color: #adff2f;
+      color: black;
+    }
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 20px;
+      font-size: 14px;
+      background-color: #111;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 onclick="location.reload()">GITOWNIA</h1>
+    <div class="social-container">
+      <div class="social-label">Socjale Tubsona:</div>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/tubson_/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@tubson762" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.twitch.tv/Tubson_" target="_blank"><i class="fab fa-twitch"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <button onclick="scrollToSection('stream')">Stream</button>
+    <button onclick="scrollToSection('videos')">Filmy</button>
+    <button onclick="scrollToSection('quotes')">Jakim Mamm0nem jesteś?</button>
+    <button onclick="scrollToSection('shots')">Shoty</button>
+  </nav>
+
+  <div id="stream" class="stream">
+    <h2>Aktualny stream Tubsona</h2>
+    <iframe src="https://player.twitch.tv/?channel=Tubson_&parent=gitownia.netlify.app" allowfullscreen></iframe>
+  </div>
+
+  <h2 style="text-align: center; margin-top: 40px;">Ostatnie filmy Tubsona</h2>
+  <div id="videos" class="container"></div>
+
+  <div id="quotes" class="text-section">
+    <h2>Jakim Mamm0nem jesteś?</h2>
+    <button id="generate-quote-button" onclick="generateQuote()">Losuj</button>
+    <p id="random-quote"></p>
+  </div>
+
+  <div id="shots" class="text-section">
+    <h2>Ostatnie shoty z kanału Mamm0n</h2>
+    <div class="shot-container">
+      <div class="shot-card"><a href="https://www.twitch.tv/mamm0n/clip/PlainHelpfulMomLitFam-qPzFoYlPVyah-uOn" target="_blank">szpont</a></div>
+      <div class="shot-card"><a href="https://www.twitch.tv/mamm0n/clip/BumblingSillyHummingbirdChefFrank-lkQBWXprL9QLHxJk" target="_blank">gg glab</a></div>
+      <div class="shot-card"><a href="https://www.twitch.tv/mamm0n/clip/DeafInspiringMochaTheRinger-A231Pz3bryDdqG2L" target="_blank">XD</a></div>
+    </div>
+  </div>
+
+  <footer>
+    Made by kokosik1211
+  </footer>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    const quotes = [
+      "Mamm0n konfident", "Mamm0n policjant", "Mamm0n wózkowy",
+      "Mamm0n git", "Mammmmkowiec", "Mamm0n szkoda prądu",
+      "Gejmerkowy Kamil", "Po prostu... Mamm0n"
+    ];
+
+    function generateQuote() {
+      const random = Math.floor(Math.random() * quotes.length);
+      document.getElementById("random-quote").textContent = quotes[random];
+    }
+
+    const API_KEY = 'AIzaSyDwoqfuwuGHzUKxJw6V5-OLNqB9N2JpfMY';
+    const tubsonChannelId = 'UCKhro5ru4pP_XzJl9xG3AFw';
+
+    async function fetchLatestVideos(channelId, maxResults = 3) {
+      const res = await fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${channelId}&part=snippet&order=date&maxResults=${maxResults}&type=video`);
+      const data = await res.json();
+      return data.items.map(item => item.id.videoId);
+    }
+
+    async function loadVideos() {
+      try {
+        const videoIds = await fetchLatestVideos(tubsonChannelId);
+        const videosContainer = document.getElementById("videos");
+        videosContainer.innerHTML = '';
+        videoIds.forEach(id => {
+          const div = document.createElement('div');
+          div.className = 'video-card';
+          div.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe>`;
+          videosContainer.appendChild(div);
+        });
+      } catch (err) {
+        console.error("Błąd podczas ładowania filmów:", err);
+      }
+    }
+
+    loadVideos();
+  </script>
+
+</body>
+</html>
